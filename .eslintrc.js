@@ -1,3 +1,10 @@
+
+/** 规则说明 
+ *    https://eslint.bootcss.com/docs/rules/
+ *    https://eslint.bootcss.com/docs/rules/
+ */ 
+
+
 module.exports = {
   root: true,
   env: {
@@ -13,6 +20,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-unused-vars': 'warn',
   },
   overrides: [
     {
