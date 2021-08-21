@@ -1,9 +1,7 @@
-
-/** 规则说明 
+/** 规则说明
  *    https://eslint.bootcss.com/docs/rules/
  *    https://eslint.bootcss.com/docs/rules/
- */ 
-
+ */
 
 module.exports = {
   root: true,
