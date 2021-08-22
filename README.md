@@ -94,3 +94,40 @@ Cypress (Chrome only)
 引入类型定义
 
 
+## vue3
+
+### 列表渲染
+
+```html
+<!-- v-for 遍历对象 -->
+<!-- 不能保证它在不同 JavaScript 引擎下的顺序都一致。 -->
+<li v-for="(value, name, index) in myObject">
+  {{ index }}. {{ name }}: {{ value }}
+</li>
+```
+
+- 使用v-for 时如果数组顺序发生变化，vue默认会更改当前位置的元素 // todo 测试  
+    *只适用于不依赖子组件状态或临时 DOM 状态 (例如：表单输入值) 的列表渲染输出 ?*
+- 绑定key属性可以重新排序元素
+- 应使用字符串、数字等基本类来作为key
+
+#### 数组变更检测
+
+- 数组变更方法 会改变元素数组的方法 被vue重新包裹
+
+1. push()
+2. pop()
+3. shift()
+4. unshift()
+5. splice()
+6. sort()
+7. reverse()
+
+- 替换数组
+
+使用时需要 this.arr = this.arr.concat(xxx)  
+vue会识别有相同元素的数组使dom重用
+
+1. filter()
+2. concat() 
+3. slice()
