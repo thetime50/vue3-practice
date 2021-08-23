@@ -131,3 +131,55 @@ vue会识别有相同元素的数组使dom重用
 1. filter()
 2. concat() 
 3. slice()
+
+### 事件处理
+
+```html
+
+<!-- $event 传递事件参数 -->
+<button @click="warn('Form cannot be submitted yet.', $event)">
+  Submit
+</button>
+
+<!-- 绑定多个事件 用,分隔 -->
+<button @click="one($event), two($event)">
+  Submit
+</button>
+```
+
+事件修饰符
+
+- .stop 停止冒泡
+- .prevent 禁止默认事件
+- .capture 捕获阶段
+- .self 自身事件
+- .once 触发一次
+- .passive 不会调用 preventDefault() 滚动事件提高效率
+
+#### 按键修饰符
+**按键别名**
+
+- .enter
+- .tab
+- .delete (捕获“删除”和“退格”键)
+- .esc
+- .space
+- .up
+- .down
+- .left
+- .right
+
+**系统修饰键**
+- .ctrl
+- .alt
+- .shift
+- .meta  
+    Mac 系统键盘上，meta 对应 command 键 (⌘)。  
+    在 Windows 系统键盘 meta 对应 Windows 徽标键 (⊞)。  
+    在 Sun 操作系统键盘上，meta 对应实心宝石键 (◆)
+- **.exact** 精确匹配系统修饰符组合触发的事件
+
+**鼠标按钮修饰符**
+.left
+.right
+.middle
