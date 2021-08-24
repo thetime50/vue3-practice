@@ -183,3 +183,43 @@ vue会识别有相同元素的数组使dom重用
 .left
 .right
 .middle
+
+
+### 表单输入绑定
+v-model 会忽略所有表单元素的 value、checked、selected attribute 的初始值而总是将当前活动实例的数据作为数据来源
+
+#### 修饰符
+- .lazy input 事件触发 转为在 change 事件进行同步
+- .number 自动将用户的输入值转为数值类型 值无法被 parseFloat() 解析，则会返回原始的值
+- .trim 自动过滤用户输入的首尾空白字符
+
+[自定义输入组件](https://v3.cn.vuejs.org/guide/component-basics.html#在组件上使用-v-model)  
+v-model 事件input 参数value 改为 事件 update:modelValue 参数 modelValue
+
+
+### 组件基础
+
+```html
+<component :is="currentTabComponent"></component>
+```
+is属性可以是
+- 已注册组件的名字
+- 一个组件的选项对象(组件配置对象)
+- 常规的 HTML 元素
+
+#### 浏览器元素限制
+is属性只在component 中有效  
+以及 &lt;el is="vue: xxxx" 使其强制生效
+
+动态组件 异步组件
+
+使用html模板时浏览器会限制 &lt;ul>、&lt;ol>、&lt;table> 和 &lt;select>内部的元素，  
+使用 &lt;tr is="vue:xxx"> 满足浏览器的元素限制并强制组件生效
+
+#### 浏览器忽略大小写
+这意味着当你在 DOM 模板中使用时，驼峰 prop 名称和 event 处理器参数需要使用它们的 kebab-cased (横线字符分隔) 等效值
+
+// 在html模板中大小写属性会失效吗??
+
+## 深入组件
+
