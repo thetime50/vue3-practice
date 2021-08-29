@@ -17,7 +17,7 @@ export default {
     };
   },
   watch: {
-    obj(after, before) {
+    obj(after) {
       console.log(Object.assign(after));
     },
   },
