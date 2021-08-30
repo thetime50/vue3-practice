@@ -23,6 +23,7 @@ export default {
       menu: [
         { name: 'element test', path: '/elementtest' },
         { name: 'vue3 test', path: '/vue3test' },
+        { name: 'vue3 深入组件', path: '/vue3test/thoroughComponent' },
       ],
     };
   },
