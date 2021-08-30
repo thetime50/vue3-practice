@@ -14,6 +14,7 @@
 
 <script>
 /* message */
+import { proxy2attr } from '@/js/utils';
 
 export default {
   name: 'date-picker',
@@ -24,6 +25,7 @@ export default {
   mounted() {
     // this.$attrs 是个 proxy
     console.log('date-picke mounted, $attrs:', this.$attrs, Object(this.$attrs));
+    console.log(proxy2attr(this.$attrs));
   },
 };
 </script>
