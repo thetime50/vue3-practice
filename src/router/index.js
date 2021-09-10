@@ -30,6 +30,11 @@ const routes = [
     name: 'thoroughComponent',
     component: () => import('@/views/vue3Test/thoroughComponent/thoroughComponent.vue'),
   },
+  {
+    path: '/vue3test/transitionsTest',
+    name: 'transitionsTest',
+    component: () => import('@/views/vue3Test/transitionsTest/transitionsTest.vue'),
+  },
 ];
 
 const router = createRouter({
