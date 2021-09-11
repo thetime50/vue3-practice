@@ -1,5 +1,6 @@
 <template>
     <div class="component-transitions-test">
+        <h3>概述 和 进入离开过渡</h3>
         <h4>初始状态 appear</h4>
         <p>
             <el-switch v-model="appeatSw"></el-switch>

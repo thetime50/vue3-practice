@@ -25,6 +25,7 @@ export default {
         { name: 'vue3 test', path: '/vue3test' },
         { name: 'vue3 深入组件', path: '/vue3test/thoroughComponent' },
         { name: 'vue3 过渡 动画', path: '/vue3test/transitionsTest' },
+        { name: 'vue3 列表过渡', path: '/vue3test/transitionsListTest' },
       ],
     };
   },

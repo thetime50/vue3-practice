@@ -35,6 +35,11 @@ const routes = [
     name: 'transitionsTest',
     component: () => import('@/views/vue3Test/transitionsTest/transitionsTest.vue'),
   },
+  {
+    path: '/vue3test/transitionsListTest',
+    name: 'transitionsListTest',
+    component: () => import('@/views/vue3Test/transitionsListTest/transitionsListTest.vue'),
+  },
 ];
 
 const router = createRouter({

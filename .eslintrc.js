@@ -21,6 +21,7 @@ module.exports = {
     'no-unused-vars': 'warn', // 禁止未使用的变量
     'no-multiple-empty-lines':["error", { "max": 4, "maxEOF": 1 ,'maxBOF':2}], // 最大空行
     'no-trailing-spaces': ["error", { "ignoreComments": true }], // 允许注释块中的尾随空格
+    'max-len':["error", { "code": 250 }],
 
     // vue规则
     'vue/no-unused-components': 'warn', // 注册但未使用的组件
