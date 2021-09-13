@@ -151,13 +151,15 @@ export default {
       //
     }
     .cell{
+      box-sizing: border-box;
       margin:1px;
       display: inline-block;
-      line-height: 40px;
+      line-height: 40px - 6px;
       width: 40px;
       text-align: center;
       vertical-align: middle;
       background-color: #faa;
+      border: solid 3px #fdd;
       border-radius: 3px;
     }
     .square-flex{
