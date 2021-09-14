@@ -40,6 +40,11 @@ const routes = [
     name: 'transitionsListTest',
     component: () => import('@/views/vue3Test/transitionsListTest/transitionsListTest.vue'),
   },
+  {
+    path: '/vue3test/compositionApi',
+    name: 'compositionApi',
+    component: () => import('@/views/vue3Test/compositionApi/compositionApi.vue'),
+  },
 ];
 
 const router = createRouter({
