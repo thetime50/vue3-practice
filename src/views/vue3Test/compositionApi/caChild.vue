@@ -40,6 +40,20 @@
         <h4>watch test</h4>
         <el-form>
           <el-form-item label="watchStrRef">{{watchStrRef}}<input v-model="watchStrRef"/></el-form-item>
+          <el-divider>多个值监听</el-divider>
+          <el-form-item label="watchStr1Ref">{{watchStrRef}}<input v-model="watchStr1Ref"/></el-form-item>
+          <el-form-item label="watchStr2Ref">{{watchStrRef}}<input v-model="watchStr2Ref"/></el-form-item>
+          <button type="button" @click="changeWatchValues">changeWatchValues</button>
+          <el-divider>数组监听</el-divider>
+          <el-form-item label="watchArrRef">{{JSON.stringify(watchStrRef)}}</el-form-item>
+          <button type="button" @click="changeWatchArr">changeWatchArr</button>
+        </el-form>
+        <h4>computed test</h4>
+        <h4>watch test</h4>
+        <el-form>
+          <el-form-item label="compVal1Ref">{{compVal1Ref}}<input type="number" v-model="compVal1Ref"/></el-form-item>
+          <el-form-item label="compVal2Ref">{{compVal2Ref}}<input type="number" v-model="compVal2Ref"/></el-form-item>
+          <el-form-item label="compValSumComputed">{{compValSumComputed}}</el-form-item>
         </el-form>
     </div>
 </template>
@@ -49,7 +63,7 @@
 import {
   ref, reactive, toRefs,
   onMounted, onBeforeUnmount, onUnmounted, onRenderTracked, onRenderTriggered,
-  watch,
+  watch, computed,
 } from 'vue';
 import { ElMessage } from 'element-plus';
 import setupRender from './setupRender.vue';
@@ -133,6 +147,13 @@ function hookSetup(props, context) { // eslint-disable-line
 }
 
 function watchSetup(props, context) { // eslint-disable-line
+  function delay(ms) {
+    return new Promise((resolve, reject) => { // eslint-disable-line
+      setTimeout(resolve, ms);
+    });
+  }
+
+
   const watchStrRef = ref('aaa');
   watch(watchStrRef, (after, before) => {  // eslint-disable-line
     ElMessage({
@@ -140,8 +161,63 @@ function watchSetup(props, context) { // eslint-disable-line
       type: 'success',
     });
   });
+
+  // 监听多个值
+  const watchStr1Ref = ref('watch str1');
+  const watchStr2Ref = ref('watch str2');
+  watch([watchStr1Ref,watchStr2Ref], (after, before) => {  // eslint-disable-line
+    ElMessage({
+      message: `watchStr1Ref watchStr2Ref change ${JSON.stringify(after)}`,
+      type: 'success',
+    });
+  });
+  function changeWatchValues() { // 只触发一次
+    const val = parseInt(Math.random() * 100);
+    watchStr1Ref.value = `watch str1 ${val}`;
+    watchStr2Ref.value = `watch str2 ${val}`;
+  }
+  // 数组监听
+  const watchArrRef = reactive([1, 2, 3, 4, 5]);
+  watch(watchArrRef,
+    (after, before) => {  // eslint-disable-line
+      ElMessage({
+        message: `watchArrRef change ${JSON.stringify(after)}`,
+        type: 'success',
+      });
+    },
+    {
+      deep: true,
+    });
+  // 监视源只能是 getter/effect 函数、ref、reactive对象或这些类型的数组。
+  watch(()=>[...watchArrRef], async (after, before) => {  // eslint-disable-line
+
+    await delay(100);
+    ElMessage({
+      message: `结构 watchArrRef change ${JSON.stringify(after)}`,
+      type: 'success',
+    });
+  });
+  function changeWatchArr() {
+    const val = parseInt(Math.random() * 100);
+    watchArrRef[0] = val;
+  }
   return {
     watchStrRef,
+    watchStr1Ref,
+    watchStr2Ref,
+    changeWatchValues,
+    changeWatchArr,
+  };
+}
+
+function computedSetup(props, context) { // eslint-disable-line
+  const compVal1Ref = ref(10);
+  const compVal2Ref = ref(12);
+  const compValSumComputed = computed(() => compVal1Ref.value + compVal2Ref.value);
+  return {
+    compVal1Ref,
+    compVal2Ref,
+    compValSumComputed,
   };
 }
 
@@ -155,10 +231,12 @@ export default {
     const refRes = refSetup(props, context);
     const hookRes = hookSetup(props, context);
     const watchRes = watchSetup(props, context);
+    const computedRes = computedSetup(props, context);
     return {
       ...refRes,
       ...hookRes,
       ...watchRes,
+      ...computedRes,
     };
   },
 };
