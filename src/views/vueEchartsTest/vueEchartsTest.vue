@@ -18,6 +18,7 @@
 
 <script>
 /* message */
+import { ref } from 'vue';
 // import IEcharts from 'vue-echarts-v3/src/full';
 // import IEcharts from 'vue-echarts-v3/src/lite';
 // import IEcharts from '@/js/vueEchartsMe/lite';
@@ -35,41 +36,128 @@ export default {
   },
   props: {
   },
-  data: () => ({
-    loading: true,
-    bar: {
+
+
+  setup(props, context) { // eslint-disable-line
+    const symbolSize = 20;
+    const loading = ref(false);
+    const bar = ref({
       title: {
-        text: 'ECharts Hello World',
+        text: 'Try Dragging these Points',
       },
-      tooltip: {},
+      tooltip: {
+        triggerOn: 'none',
+        formatter(params) {
+          return `X: ${params.data[0].toFixed(2)}<br>Y: ${params.data[1].toFixed(2)}`;
+        },
+      },
+      grid: {
+      },
       xAxis: {
-        data: ['Shirt', 'Sweater', 'Chiffon Shirt', 'Pants', 'High Heels', 'Socks'],
+        min: -100,
+        max: 80,
+        type: 'value',
+        axisLine: { onZero: false },
       },
-      yAxis: {},
-      series: [{
-        name: 'Sales',
-        type: 'bar',
-        data: [5, 20, 36, 10, 10, 20],
-      }],
-    },
-  }),
-  methods: {
-    doRandom() {
-      const that = this;
+      yAxis: {
+        min: -30,
+        max: 60,
+        type: 'value',
+        axisLine: { onZero: false },
+      },
+      dataZoom: [
+        {
+          type: 'slider',
+          xAxisIndex: 0,
+          filterMode: 'empty',
+        },
+        {
+          type: 'slider',
+          yAxisIndex: 0,
+          filterMode: 'empty',
+        },
+        {
+          type: 'inside',
+          xAxisIndex: 0,
+          filterMode: 'empty',
+        },
+        {
+          type: 'inside',
+          yAxisIndex: 0,
+          filterMode: 'empty',
+        },
+      ],
+      series: [
+        {
+          id: 'a',
+          type: 'line',
+          smooth: true,
+          symbolSize,
+          data: [[15, 0], [-50, 10], [-56.5, 20], [-46.5, 30], [-22.1, 40]],
+        },
+      ],
+    });
+
+
+    function doRandom() {
       const data = [];
       for (let i = 0, min = 5, max = 99; i < 6; i += 1) {
         data.push(Math.floor(Math.random() * (max + 1 - min) + min));
       }
-      that.loading = !that.loading;
-      that.bar.series[0].data = data;
-    },
-    onReady(instance, ECharts) {
+      loading.value = !loading.value;
+      bar.value.series[0].data = data;
+    }
+    function onReady(instance, ECharts) {
       console.log(instance, ECharts);
-    },
-    onClick(event, instance, ECharts) {// eslint-disable-line
+    }
+    function onClick(event, instance, ECharts) {// eslint-disable-line
       console.log(arguments);// eslint-disable-line
-    },
+    }
+    return {
+      loading,
+      bar,
+      doRandom,
+      onReady,
+      onClick,
+    };
   },
+
+
+  // data: () => ({
+  //   loading: true,
+  //   bar: {
+  //     title: {
+  //       text: 'ECharts Hello World',
+  //     },
+  //     tooltip: {},
+  //     xAxis: {
+  //       data: ['Shirt', 'Sweater', 'Chiffon Shirt', 'Pants', 'High Heels', 'Socks'],
+  //     },
+  //     yAxis: {},
+  //     series: [{
+  //       name: 'Sales',
+  //       type: 'bar',
+  //       data: [5, 20, 36, 10, 10, 20],
+  //     }],
+  //   },
+  // }),
+  // methods: {
+  //   doRandom() {
+  //     const that = this;
+  //     const data = [];
+  //     for (let i = 0, min = 5, max = 99; i < 6; i += 1) {
+  //       data.push(Math.floor(Math.random() * (max + 1 - min) + min));
+  //     }
+  //     that.loading = !that.loading;
+  //     that.bar.series[0].data = data;
+  //   },
+  //   onReady(instance, ECharts) {
+  //     console.log(instance, ECharts);
+  //   },
+  //   onClick(event, instance, ECharts) {// eslint-disable-line
+  //     console.log(arguments);// eslint-disable-line
+  //   },
+  // },
 };
 </script>
 
