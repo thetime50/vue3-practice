@@ -108,6 +108,7 @@ export default {
       bar.value.series[0].data = data;
     }
     function onReady(instance, ECharts) {
+      loading.value = false;
       console.log(instance, ECharts);
     }
     function onClick(event, instance, ECharts) {// eslint-disable-line
@@ -152,6 +153,7 @@ export default {
   //     that.bar.series[0].data = data;
   //   },
   //   onReady(instance, ECharts) {
+  //     this.loading = false
   //     console.log(instance, ECharts);
   //   },
   //   onClick(event, instance, ECharts) {// eslint-disable-line
