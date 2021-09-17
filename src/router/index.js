@@ -45,6 +45,11 @@ const routes = [
     name: 'compositionApi',
     component: () => import('@/views/vue3Test/compositionApi/compositionApi.vue'),
   },
+  {
+    path: '/vueEchartsTest',
+    name: 'vueEchartsTest',
+    component: () => import('@/views/vueEchartsTest/vueEchartsTest.vue'),
+  },
 ];
 
 const router = createRouter({

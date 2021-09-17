@@ -22,11 +22,14 @@ export default {
     return {
       menu: [
         { name: 'element test', path: '/elementtest' },
+
         { name: 'vue3 test', path: '/vue3test' },
         { name: 'vue3 深入组件', path: '/vue3test/thoroughComponent' },
         { name: 'vue3 过渡 动画', path: '/vue3test/transitionsTest' },
         { name: 'vue3 列表过渡', path: '/vue3test/transitionsListTest' },
         { name: 'vue3 composition API', path: '/vue3test/compositionApi' },
+
+        { name: 'vue echarts test', path: '/vueEchartsTest' },
       ],
     };
   },

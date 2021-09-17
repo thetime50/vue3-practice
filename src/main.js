@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import installElementPlus from './plugins/element';
 import 'animate.css';
+import './js/vueEcharts';
 
 const app = createApp(App);
 installElementPlus(app);
