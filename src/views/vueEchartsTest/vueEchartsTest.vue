@@ -5,12 +5,14 @@
 
         <h5>options api render test</h5>
         <optionsApiRender />
-        <IEcharts
-            :option="bar"
-            :loading="loading"
-            @ready="onReady"
-            @click="onClick"
-        />
+        <div class="echarts">
+          <IEcharts
+              :option="bar"
+              :loading="loading"
+              @ready="onReady"
+              @click="onClick"
+          />
+        </div>
         <button @click="doRandom">Random</button>
 
     </div>

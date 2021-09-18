@@ -47,10 +47,46 @@ import 'echarts/lib/component/title';
 // import 'zrender/lib/vml/vml';
  */
 
+// import * as ECharts from 'echarts'; // full
+// import * as ECharts from 'echarts/lib/echarts'; // lite
+
+
+import {
+  toRaw,
+} from 'vue';
+
 /* eslint-disable */
 IEcharts.render = function (h) {
     const that = this;
     return ( < div style = {that.styles}/>);
+}
+
+// IEcharts.watch.option.handler = function (option) {
+//   const that = this;
+//   console.log('IEcharts.watch.option.handler', option, toRaw(option))
+//   that.instance.setOption(toRaw(option), that.notMerge, that.lazyUpdate);
+// }
+
+IEcharts.methods.init = function () {
+  const that = this;
+  if (!that.instance) {
+    const dom = that.$el;
+    let instance = IEcharts.__echarts__.getInstanceByDom(dom);
+    // console.log('IEcharts.init', that.initOpts, toRaw(that.initOpts),)
+    if (!instance) {
+      instance = IEcharts.__echarts__.init(dom, that.theme, toRaw(that.initOpts || this.option));
+    }
+    instance.group = that.group;
+    that.instance = instance;
+    that.$emit('ready', instance, IEcharts.__echarts__);
+    setTimeout(function () {
+      that.ifLoading(that.loading);
+      that.update(); // 这里报错的
+      // that.watch();
+      that.bind();
+      that.initResize(dom);
+    },10);
+  }
 }
 /* eslint-enable */
 export default IEcharts;
